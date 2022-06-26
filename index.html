@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title> Something goes here </title>
+<style>
+  body{
+    margin: 0 auto;
+    overflow: hidden;
+    font-family: Twemoji Mozilla;
+  }
+
+</style>
+</head>
+<body>
+
+<script>
+
+const container = document.createElement('div'); 
+container.id = "container";
+document.body.appendChild(container);  
+
+const canvas = document.createElement('canvas');  
+canvas.width = window.innerWidth;
+canvas.height = window.innerHeight;
+canvas.classList.add("canvas");
+canvas.style.position = "absolute"; 
+canvas.style.zIndex = +2; 
+container.appendChild(canvas);           
+const ctx = canvas.getContext('2d');
+
+function test(text){
+  ctx.font = '100px Twemoji Mozilla';
+  ctx.fillText(text, 250, 100);
+  const textMetrics = ctx.measureText(text);
+  console.log(textMetrics)	
+}
+
+let emoji = ["💜","▪️"","⬛"];
+for (let i = 0; i < emoji.length; i++) { 
+  test(emoji[i]);
+}
+
+//console.log(window.navigator.userAgent)
+  
+</script>
+</body>
+</html>
