@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title> 🍮 </title>
+<style>
+  body{
+    margin: 0 auto;
+    overflow: hidden;
+    font-family: verdana,Twemoji Mozilla;
+  }
+
+</style>
+</head>
+<body>
+
+  <h1>this is a test: 🍮🦈</h1>
+
+<script>
+
+
+
+const container = document.createElement('div'); 
+container.id = "container";
+document.body.appendChild(container);  
+
+const canvas = document.createElement('canvas');  
+canvas.width = window.innerWidth;
+canvas.height = window.innerHeight;
+canvas.classList.add("canvas");
+canvas.style.position = "absolute"; 
+canvas.style.zIndex = +2; 
+container.appendChild(canvas);           
+const ctx = canvas.getContext('2d');
+
+//helper functions
+function per(percent, number){
+    return (percent / 100) * number;
+}
+
+ctx.font = '50px Twemoji Mozilla';
+ctx.fillText('🍮🦈', 250, 50);
+
+/*
+
+//draw emojis using ctx draw to a canvas
+function drawEmoji({emoji,context,size,x,y}){
+  
+  let fontSize = size;
+  //console.log(size)
+
+  const text = emoji;
+  context.font = fontSize+'px Twemoji Mozilla';
+  const textMetrics = context.measureText(text);
+
+  let left = textMetrics.actualBoundingBoxLeft;
+  let width = textMetrics.actualBoundingBoxRight + textMetrics.actualBoundingBoxLeft;
+  let height = textMetrics.actualBoundingBoxAscent + textMetrics.actualBoundingBoxDescent;
+
+  let biggest;
+  let fontSizeTrue;
+  if (width == height && width > fontSize){
+      biggest = "both;"
+      fontSizeTrue = fontSize - (width - fontSize)
+  } else if (width > height && width > fontSize){
+      biggest = "width;"
+      fontSizeTrue = fontSize - (width - fontSize)
+  } else if (width < height && height > fontSize){
+      biggest = "height;"
+      fontSizeTrue = fontSize - (height - fontSize)
+  } else if (width == height && width < fontSize){
+      biggest = "both;"
+      fontSizeTrue = width+ (fontSize - width)
+  } else if (width > height && width < fontSize){
+      biggest = "width;"
+      fontSizeTrue = width+ (fontSize - width)
+  } else if (width < height && height < fontSize){
+      biggest = "height;"
+      fontSizeTrue = height+ (fontSize - height)
+  }
+
+  context.font = fontSizeTrue+"px serif";
+  const emojiMetrics = context.measureText(emoji);
+  let widthEmoji = emojiMetrics.actualBoundingBoxRight + emojiMetrics.actualBoundingBoxLeft;
+  let heightEmoji = emojiMetrics.actualBoundingBoxAscent + emojiMetrics.actualBoundingBoxDescent;
+
+  context.fillText(emoji,emojiMetrics.actualBoundingBoxLeft+x, emojiMetrics.actualBoundingBoxAscent+y);
+  return ["width: "+widthEmoji,"height: "+heightEmoji];
+
+ }
+
+ console.log("I hate Emojis 2022 edition")
+
+ console.log("🦈 context.font = '200px serif' in real size = ",drawEmoji({emoji:"🦈",context:ctx,size:200,x:1,y:1}));
+ console.log("🍮 context.font = '200px serif' in real size = ",drawEmoji({emoji:"🍮",context:ctx,size:200,x:1,y:1}));
+
+
+*/
+  
+</script>
+</body>
+</html>
