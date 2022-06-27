@@ -40,22 +40,29 @@ function drawEmoji({emoji,context,size,x,y}){
   //console.log(size)
 
   const text = emoji;
-  context.font = fontSize+'px serif';
+  context.font = fontSize+'px Twemoji Mozilla';
+  //context.textAlign = "center";
   const textMetrics = context.measureText(text);
 
   let left = textMetrics.actualBoundingBoxLeft;
   let width = textMetrics.actualBoundingBoxRight + textMetrics.actualBoundingBoxLeft;
   let height = textMetrics.actualBoundingBoxAscent + textMetrics.actualBoundingBoxDescent;
 
-  let testSize = size-(height-size);
-  console.log(testSize)
+  console.log(textMetrics,left,width,height);
 
-  context.font = testSize+"px serif";
+  let realSize = size-(width-size);
+  if (height > width ){
+    realSize = size-(height-size);
+  }
+  
+
+  //context.font = realSize+"px Twemoji Mozilla";
   const emojiMetrics = context.measureText(emoji);
   let widthEmoji = emojiMetrics.actualBoundingBoxRight + emojiMetrics.actualBoundingBoxLeft;
   let heightEmoji = emojiMetrics.actualBoundingBoxAscent + emojiMetrics.actualBoundingBoxDescent;
+  console.log(heightEmoji)
 
-  context.fillText(emoji,emojiMetrics.actualBoundingBoxLeft-1, emojiMetrics.actualBoundingBoxAscent);
+  context.fillText(emoji,emojiMetrics.actualBoundingBoxLeft, 100);
   //return [fontSizeTrue,widthEmoji,heightEmoji];
 
  }
