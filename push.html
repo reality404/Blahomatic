@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title> push test </title>
+<style>
+  body{
+    margin: 0 auto;
+    overflow: hidden;
+  }
+
+</style>
+</head>
+<body>
+
+<script>
+
+const container = document.createElement('div'); 
+container.id = "container";
+document.body.appendChild(container);  
+
+const canvas = document.createElement('canvas');  
+canvas.width = window.innerWidth;
+canvas.height = window.innerHeight;
+canvas.classList.add("canvas");
+canvas.style.position = "absolute"; 
+canvas.style.zIndex = +2; 
+container.appendChild(canvas);           
+const ctx = canvas.getContext('2d');
+
+//helper functions
+function per(percent, number){
+    return (percent / 100) * number;
+}
+
+//draw emojis using ctx draw to a canvas
+function drawEmoji({emoji,context,size,x,y}){
+  
+  let fontSize = size;
+  //console.log(size)
+
+  const text = emoji;
+  context.font = fontSize+'px serif';
+  const textMetrics = context.measureText(text);
+
+  let left = textMetrics.actualBoundingBoxLeft;
+  let width = textMetrics.actualBoundingBoxRight + textMetrics.actualBoundingBoxLeft;
+  let height = textMetrics.actualBoundingBoxAscent + textMetrics.actualBoundingBoxDescent;
+
+  let testSize = size-(height-size);
+  console.log(testSize)
+
+  context.font = testSize+"px serif";
+  const emojiMetrics = context.measureText(emoji);
+  let widthEmoji = emojiMetrics.actualBoundingBoxRight + emojiMetrics.actualBoundingBoxLeft;
+  let heightEmoji = emojiMetrics.actualBoundingBoxAscent + emojiMetrics.actualBoundingBoxDescent;
+
+  context.fillText(emoji,emojiMetrics.actualBoundingBoxLeft-1, emojiMetrics.actualBoundingBoxAscent);
+  //return [fontSizeTrue,widthEmoji,heightEmoji];
+
+ }
+
+ctx.fillRect(0, 0, 100, 100);	
+console.log(drawEmoji({emoji:"💜",context:ctx,size:100,x:0,y:0}));
+ 
+  
+
+  
+</script>
+</body>
+</html>

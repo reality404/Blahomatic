@@ -29,16 +29,56 @@ canvas.style.zIndex = +2;
 container.appendChild(canvas);           
 const ctx = canvas.getContext('2d');
 
-function test(text){
-  ctx.font = '100px Twemoji Mozilla';
-  ctx.fillText(text, 250, 100);
-  const textMetrics = ctx.measureText(text);
-  console.log(textMetrics)	
-}
+const canvasTemp = document.createElement('canvas'),
+ctxTemp = canvasTemp.getContext('2d');
 
-let emoji = ["💜","▪️"","⬛"];
-for (let i = 0; i < emoji.length; i++) { 
-  test(emoji[i]);
+function test(context,fontSize,text){
+
+  context.font = fontSize+'px Twemoji Mozilla';
+ 
+  let textMetrics = context.measureText(text);
+  let left = textMetrics.actualBoundingBoxLeft;
+  let width = textMetrics.actualBoundingBoxRight + textMetrics.actualBoundingBoxLeft;
+  let height = textMetrics.actualBoundingBoxAscent + textMetrics.actualBoundingBoxDescent;
+  console.log(left,width,height)
+
+  let biggest;
+  let fontSizeTrue;
+  if (width == height && width > fontSize){
+      biggest = "both;"
+      fontSizeTrue = fontSize - (width - fontSize)
+  } else if (width > height && width > fontSize){
+      biggest = "width;"
+      fontSizeTrue = fontSize - (width - fontSize)
+  } else if (width < height && height > fontSize){
+      biggest = "height;"
+      fontSizeTrue = fontSize - (height - fontSize)
+  } else if (width == height && width < fontSize){
+      biggest = "both;"
+      fontSizeTrue = width+ (fontSize - width)
+  } else if (width > height && width < fontSize){
+      biggest = "width;"
+      fontSizeTrue = width+ (fontSize - width)
+  } else if (width < height && height < fontSize){
+      biggest = "height;"
+      fontSizeTrue = height+ (fontSize - height)
+  }
+
+  //ctx.font = fontSizeTrue+'px Twemoji Mozilla';
+  //ctx.fillText(text, 250, 100);
+}
+const canvasS = document.createElement('canvas'),
+ctxS = canvasS.getContext('2d');
+let emoji = ["💜","▪️",];
+let emojiSize = [100,200,300,400,500];
+for (let i = 0; i < emojiSize.length; i++) {
+  ctxS.clearRect(0, 0, canvasS.width, canvasS.height);
+  canvasS.width = emojiSize[i];
+  canvasS.height = emojiSize[i];
+  for (let j = 0; j < emoji.length; j++) {
+
+  test(ctxS,emojiSize[i],emoji[j]);
+  }
 }
 
 //console.log(window.navigator.userAgent)
