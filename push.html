@@ -7,13 +7,39 @@
   body{
     margin: 0 auto;
     overflow: hidden;
+    font-family: Twemoji Mozilla;
+    font-size: 150px;
   }
 
 </style>
 </head>
 <body>
 
+<div>I hate Emojis</div>
+
 <script>
+
+const container = document.createElement('div'); 
+container.id = "container";
+document.body.appendChild(container); 
+
+function createElement(element,id,cs,apd){
+
+  cs = document.createElement(element);  
+  //canvas.width = window.innerWidth;
+  //canvas.height = window.innerHeight;
+  cs.setAttribute("id", id);
+  //cs.classList.add(cs);
+  //canvas.style.position = "absolute"; 
+  //canvas.style.zIndex = +2; 
+  container.appendChild(cs);           
+  const ctx = cs.getContext('2d');
+
+}
+
+createElement("canvas","id","class","container");
+
+/*
 
 const container = document.createElement('div'); 
 container.id = "container";
@@ -70,7 +96,7 @@ function drawEmoji({emoji,context,size,x,y}){
 ctx.fillRect(0, 0, 100, 100);	
 console.log(drawEmoji({emoji:"💜",context:ctx,size:100,x:0,y:0}));
  
-  
+*/
 
   
 </script>
