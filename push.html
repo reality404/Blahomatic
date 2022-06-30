@@ -23,21 +23,21 @@ const container = document.createElement('div');
 container.id = "container";
 document.body.appendChild(container); 
 
-function createElement(element,id,cs,apd){
+function createElement(elt,id,cs,apd){
 
-  cs = document.createElement(element);  
+  let element = document.createElement(elt);  
   //canvas.width = window.innerWidth;
   //canvas.height = window.innerHeight;
-  cs.setAttribute("id", id);
-  //cs.classList.add(cs);
+  element.setAttribute("id", id);
+  element.classList.add(cs);
   //canvas.style.position = "absolute"; 
   //canvas.style.zIndex = +2; 
-  container.appendChild(cs);           
-  const ctx = cs.getContext('2d');
+  apd.appendChild(cs);           
+  //let ctx = element.getContext('2d');
 
 }
 
-createElement("canvas","id","class","container");
+createElement("canvas","id","class",container);
 
 /*
 
