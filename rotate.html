@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title> Spin me right round like a sheep </title>
+<style>
+  body{
+    margin: 0 auto;
+    overflow: hidden;
+    font-family: Twemoji Mozilla;
+  }
+
+</style>
+</head>
+<body>
+
+<script>
+
+const container = document.createElement('div'); 
+container.id = "container";
+document.body.appendChild(container);  
+
+const canvas = document.createElement('canvas');  
+canvas.width = window.innerWidth;
+canvas.height = window.innerHeight;
+canvas.classList.add("canvas");
+canvas.style.position = "absolute"; 
+canvas.style.zIndex = +2; 
+container.appendChild(canvas);           
+const ctx = canvas.getContext('2d');
+
+
+const canvasO = document.createElement('canvas');  
+canvasO.width = 200;
+canvasO.height = 200;          
+const ctxO = canvasO.getContext('2d');
+
+ctxO.textBaseline = 'middle'; 
+ctxO.textAlign = 'center'; 
+ctxO.font = "100px Arial";
+ctxO.fillText('🐏', canvasO.width/2, canvasO.height/2);
+
+const canvasM = document.createElement('canvas');  
+canvasM.width = 200;
+canvasM.height = 200;          
+const ctxM = canvasM.getContext('2d');
+
+ctxM.textBaseline = 'middle'; 
+ctxM.textAlign = 'center'; 
+ctxM.font = "100px Arial";
+ctxM.fillText('🐑', canvasM.width/2, canvasM.height/2);
+//let test = createImageBitmap(ctxO);
+
+//var imageData = ctx.getImageData(0, 0, image.width, image.height);
+
+//ctx.drawImage(test, 0, 0)
+
+//ctx.drawImage(canvasO,(canvas.width/2)-100,(canvas.height/2)-100);   
+
+
+var x = canvas.width / 2;
+var y = canvas.height / 2;
+//var width = image.width;
+//var height = image.height;
+
+function rotate(context,image,width,height,angleInRadians){
+  context.translate(x, y);
+  context.rotate(angleInRadians);
+  context.drawImage(image, -width / 2, -height / 2, width, height);
+  context.rotate(-angleInRadians);
+  context.translate(-x, -y);
+}
+
+//rotate(ctx,canvasO,canvasO.width,canvasO.height,160);
+
+
+let count = 0;
+let countM = 360;
+function repeatOften() {
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+  count += 0.05;
+  countM -= 0.05;
+  if (count == 360 || count > 360){
+    count = 0;
+  }
+
+  if (countM == 0 || countM < 0){
+    countM = 360;
+  }
+  console.log(count)
+  rotate(ctx,canvasO,canvasO.width,canvasO.height,count);
+  rotate(ctx,canvasM,canvasO.width,canvasO.height,countM);
+  // Do whatever
+
+  requestAnimationFrame(repeatOften);
+}
+//requestAnimationFrame(repeatOften);
+
+
+</script>
+</body>
+</html>
