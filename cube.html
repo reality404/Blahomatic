@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title> Spin me right round like a sheep </title>
+<style>
+  body{
+    margin: 0 auto;
+    overflow: hidden;
+    font-family: Twemoji Mozilla;
+  }
+
+</style>
+</head>
+<body>
+
+<script>
+
+const container = document.createElement('div'); 
+container.id = "container";
+document.body.appendChild(container);  
+
+const canvas = document.createElement('canvas');  
+canvas.width = window.innerWidth;
+canvas.height = window.innerHeight;
+canvas.classList.add("canvas");
+canvas.style.position = "absolute"; 
+canvas.style.zIndex = +2; 
+container.appendChild(canvas);           
+const ctx = canvas.getContext('2d');
+
+const canvasO = document.createElement('canvas');  
+canvasO.width = 600;
+canvasO.height = 100;          
+const ctxO = canvasO.getContext('2d');
+
+//ctxO.textBaseline = 'middle'; 
+//ctxO.textAlign = 'center'; 
+//ctxO.font = "100px Arial";
+//ctxO.fillText('🐏', canvasO.width/2, canvasO.height/2);
+
+let cubeSide=["red","yellow","green","aqua","blue","fuchsia"];
+let cubeSideColour=["rgba(255,0,0,0.5)","rgba(255,255,0,0.5)","rgba(0,128,0,0.5)","rgba(0,255,255,0.5)","rgba(0,0,255,0.5)","rgb(255,0,255,0.5)"];
+
+for (let i = 0; i < cubeSideColour.length; i++) {
+  ctxO.fillStyle = cubeSideColour[i];
+  ctxO.fillRect(100*i, 0, 100, 100);
+  ctxO.fillStyle = "#000000"; 
+  ctxO.font = "10px Arial";
+  ctxO.fillText(cubeSideColour[i], (100*i), 100/2);
+}
+
+//ctx.drawImage(canvasO,0,200); 
+
+
+
+//drawImage(image, sx, sy, sWidth, sHeight, dx, dy, dWidth, dHeight)
+ctx.drawImage(canvasO, 0, 0, 100, 100, canvas.width/2, canvas.height/2, 100, 100)
+ctx.transform(1, 0.5, -0.5, 1, 30, 10);
+ctx.drawImage(canvasO, 100, 0, 100, 100, canvas.width/2, canvas.height/2, 100, 100)
+ctx.drawImage(canvasO, 200, 0, 100, 100, canvas.width/2, canvas.height/2, 100, 100)
+ctx.drawImage(canvasO, 300, 0, 100, 100, canvas.width/2, canvas.height/2, 100, 100)
+ctx.drawImage(canvasO, 400, 0, 100, 100, canvas.width/2, canvas.height/2, 100, 100)
+ctx.drawImage(canvasO, 500, 0, 100, 100, canvas.width/2, canvas.height/2, 100, 100)
+
+
+
+
+</script>
+</body>
+</html>

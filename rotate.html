@@ -29,49 +29,81 @@ canvas.style.zIndex = +2;
 container.appendChild(canvas);           
 const ctx = canvas.getContext('2d');
 
-
 const canvasO = document.createElement('canvas');  
-canvasO.width = 200;
-canvasO.height = 200;          
+canvasO.width = 600;
+canvasO.height = 100;          
 const ctxO = canvasO.getContext('2d');
 
-ctxO.textBaseline = 'middle'; 
-ctxO.textAlign = 'center'; 
-ctxO.font = "100px Arial";
-ctxO.fillText('🐏', canvasO.width/2, canvasO.height/2);
+//ctxO.textBaseline = 'middle'; 
+//ctxO.textAlign = 'center'; 
+//ctxO.font = "100px Arial";
+//ctxO.fillText('🐏', canvasO.width/2, canvasO.height/2);
 
-const canvasM = document.createElement('canvas');  
-canvasM.width = 200;
-canvasM.height = 200;          
-const ctxM = canvasM.getContext('2d');
+let cubeSideColour=["red","orange","yellow","green","blue","indigo"];
 
-ctxM.textBaseline = 'middle'; 
-ctxM.textAlign = 'center'; 
-ctxM.font = "100px Arial";
-ctxM.fillText('🐑', canvasM.width/2, canvasM.height/2);
-//let test = createImageBitmap(ctxO);
-
-//var imageData = ctx.getImageData(0, 0, image.width, image.height);
-
-//ctx.drawImage(test, 0, 0)
-
-//ctx.drawImage(canvasO,(canvas.width/2)-100,(canvas.height/2)-100);   
+for (let i = 0; i < cubeSideColour.length; i++) {
+  ctxO.fillStyle = cubeSideColour[i];
+  ctxO.fillRect(100*i, 0, 100, 100);
+}
 
 
-var x = canvas.width / 2;
-var y = canvas.height / 2;
+
+
+//ctx.drawImage(canvasO,(canvas.width/2)-100,(canvas.height/2)-100); 
+
+/*function drawLine(context,style,start,end){
+  context.beginPath();
+  context.moveTo(...start);
+  context.lineTo(...end);
+  context.strokeStyle = style;
+  context.stroke(); 
+}
+drawLine(ctx,"blue",[400,400],[400,600]);
+drawLine(ctx,"green",[200,400],[400,600]);*/ 
+
+/*function drawLine(context, style, x1, y1, length, angle) {    
+    context.moveTo(x1, y1);  
+    radians = angle * (Math.PI/180);     
+    let x2 = x1 + Math.cos(radians ) * length;	 
+    let y2 = y1 + Math.sin(radians ) * length;	   
+    context.lineTo(x2, y2);   
+    context.strokeStyle = style;    
+    context.stroke();
+}
+
+drawLine(ctx,"blue",200, 200, 100, 90); 
+
+drawLine(ctx,"blue",200, 300, 100, 210);
+
+drawLine(ctx,"blue",200, 300, 100, -30);
+
+drawLine(ctx,"blue",200, 300, 100, -30);*/
+
+
+
+
+//var x = canvas.width / 2;
+//var y = canvas.height / 2;
 //var width = image.width;
 //var height = image.height;
 
-function rotate(context,image,width,height,angleInRadians){
+//function rotate(context,image,width,height,angleInRadians){
+function rotate(context, image, sx, sy, sWidth, sHeight, dx, dy, dWidth, dHeight,x,y,angleInRadians){
   context.translate(x, y);
   context.rotate(angleInRadians);
-  context.drawImage(image, -width / 2, -height / 2, width, height);
+  //context.drawImage(image, -width / 2, -height / 2, width, height);
+  context.drawImage(image,sx, sy, sWidth, sHeight, -dx / 2, -dy / 2, dWidth, dHeight);
   context.rotate(-angleInRadians);
   context.translate(-x, -y);
 }
 
 //rotate(ctx,canvasO,canvasO.width,canvasO.height,160);
+
+//drawImage(image, sx, sy, sWidth, sHeight, dx, dy, dWidth, dHeight)
+rotate(ctx,canvasO, 0, 0, 100, 100, 0, 0, 100, 100,200,200,0)
+
+//rotate(ctx,canvasO, 100, 0, 100, 100, 0, 0, 100, 100,400,200,210)
+
 
 
 let count = 0;

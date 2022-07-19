@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title> Spin me right round like a sheep </title>
+<style>
+  body{
+    margin: 0 auto;
+    overflow: hidden;
+    font-family: Twemoji Mozilla;
+  }
+
+</style>
+</head>
+
+<body id=b>
+  <canvas id=a width=500 height=500></canvas>
+  <script>
+  c = a.getContext("2d");
+  camx = 0;
+  camy = 0;
+  camz = -6;
+  camYaw = 0;
+  camPitch = 0;
+  camRoll = 0;
+  w = a.width/2;
+  h = a.height/2;
+  time = 0;
+  perspective = 400;
+  
+  // Camera rotations helper
+  rotate = (a, b, angle) => [
+    Math.cos(angle) * a - Math.sin(angle) * b,
+    Math.sin(angle) * a + Math.cos(angle) * b
+  ];
+  
+  // Cube faces
+  cube = [
+    {center: [-1, 0, 0], vertices: [[-1,-1,-1],[-1,-1,1],[-1,1,1],[-1,1,-1]], color: "red"},
+    {center: [1, 0, 0], vertices:  [[1,-1,-1],[1,-1,1],[1,1,1],[1,1,-1]], color: "blue"},
+    {center: [0, -1, 0], vertices: [[-1,-1,-1],[-1,-1,1],[1,-1,1],[1,-1,-1]], color: "yellow"},
+    {center: [0, 1, 0], vertices:  [[-1,1,-1],[-1,1,1],[1,1,1],[1,1,-1]], color: "green"},
+    {center: [0, 0, -1], vertices: [[-1,-1,-1],[-1,1,-1],[1,1,-1],[1,-1,-1]], color: "black"},
+    {center: [0, 0, 1], vertices:  [[-1,-1,1],[-1,1,1],[1,1,1],[1,-1,1]], color: "purple"},
+  ];
+  
+  // Project a point according to camera position and rotation
+  project = (vertex) => {
+    [x, y, z] = vertex;
+    [x,z] = rotate(x,z,camYaw); // Camera yaw
+    [y,z] = rotate(y,z,camPitch); // Camera pitch
+    [x,y] = rotate(x,y,camRoll); // Camera roll
+  
+    // Camera offset
+    x -= camx;
+    y -= camy;
+    z -= camz;
+    
+    if(z > 0){
+      dist = Math.hypot(camx, camy, z);
+      projX = w+x/z*perspective;
+      projY = h+y/z*perspective;
+      points.push([dist, projX, projY, i]);
+    }
+    
+    else {
+      projX = projY = -1;
+    }
+    
+    return [x, y, z, projX, projY];
+  };
+  
+  setInterval(
+    function(){
+      time += .016;
+      a.width ^= 0;
+      
+      // Move camera
+      camYaw += Math.cos(time) * .1;
+      camPitch += .05;
+      camRoll += .02;
+      points = [];
+      for(i of cube){
+        [x, y, z] = project(i.center);
+      }
+      
+      // Render
+      points.sort((a,b) => b[0] - a[0]);
+      for(i=3; i<6; i++){
+        if(points[i]){
+          face = points[i][3];
+          c.beginPath();
+          c.fillStyle = face.color;
+        
+          [x, y, z, projX, projY] = project(face.vertices[0]);
+          if(projX > 0) c.moveTo(projX, projY);
+        
+          [x, y, z, projX, projY] = project(face.vertices[1]);
+          if(projX > 0) c.lineTo(projX, projY);
+        
+          [x, y, z, projX, projY] = project(face.vertices[2]);
+          if(projX > 0) c.lineTo(projX, projY);
+        
+          [x, y, z, projX, projY] = project(face.vertices[3]);
+          if(projX > 0) c.lineTo(projX, projY);
+        
+          c.fill();
+          c.closePath();
+        }
+      }
+    },
+    33
+  );
+  </script>
+
+  </body>
+</html>
