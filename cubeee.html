@@ -35,26 +35,7 @@ var x2 = 100;
 var y = 100;
 var color = "#ff8d4b";
 
-// Animation function
-function draw(){
-  // clear the canvas
-  ctx.clearRect(0, 0, canvas.width, canvas.height);
-
-  
-  // draw the cube
-  drawCube(
-    window.innerWidth/2,
-    window.innerHeight/2 + y/2,
-    Number(x1),
-    Number(x2),
-    Number(y),
-    color
-  );
-  
-  requestAnimationFrame(draw);
-}
-draw();
-
+drawCube(window.innerWidth/2, window.innerHeight/2 + y/2, x1, x2, y, color);
 
 // Draw a cube to the specified specs
 function drawCube(x, y, wx, wy, h, color) {
@@ -66,7 +47,7 @@ function drawCube(x, y, wx, wy, h, color) {
     ctx.closePath();
     ctx.fillStyle = "violet";
     ctx.strokeStyle = color;
-    ctx.stroke();
+    //ctx.stroke();
     //ctx.fill();
 
     ctx.beginPath();
@@ -92,6 +73,20 @@ function drawCube(x, y, wx, wy, h, color) {
     ctx.strokeStyle = color;
     ctx.stroke();
     //ctx.fill();
+
+    ctx.beginPath();
+    ctx.moveTo(x, y - h);
+    ctx.lineTo(x - wx, y - h - wx * 0.5);
+    ctx.lineTo(x - wx + wy, y - h - (wx * 0.5 + wy * 0.5));
+    ctx.lineTo(x + wy, y - h - wy * 0.5);
+    ctx.closePath();
+    ctx.fillStyle = "purple";
+    //ctx.strokeStyle = shadeColor(color, 60);
+    ctx.strokeStyle = "purple";
+    ctx.stroke();
+    //ctx.fill();
+
+    
   }
 
 </script>
