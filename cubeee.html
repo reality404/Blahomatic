@@ -35,6 +35,10 @@ var x2 = 100;
 var y = 100;
 var color = "#ff8d4b";
 
+
+const CUBE_VERTICES = [[-1, -1, -1],[1, -1, -1],[-1, 1, -1],[1, 1, -1],[-1, -1, 1],[1, -1, 1],[-1, 1, 1],[1, 1, 1]];
+const CUBE_LINES = [[0, 1], [1, 3], [3, 2], [2, 0], [2, 6], [3, 7], [0, 4], [1, 5], [6, 7], [6, 4], [7, 5], [4, 5]];
+
 drawCube(window.innerWidth/2, window.innerHeight/2 + y/2, x1, x2, y, color);
 
 // Draw a cube to the specified specs
@@ -46,8 +50,8 @@ function drawCube(x, y, wx, wy, h, color) {
     ctx.lineTo(x, y - h * 1);
     ctx.closePath();
     ctx.fillStyle = "violet";
-    ctx.strokeStyle = color;
-    //ctx.stroke();
+    ctx.strokeStyle = "green";
+    ctx.stroke();
     //ctx.fill();
 
     ctx.beginPath();
@@ -58,7 +62,7 @@ function drawCube(x, y, wx, wy, h, color) {
     ctx.closePath();
     ctx.fillStyle = "blue";
     //ctx.strokeStyle = shadeColor(color, 50);
-    ctx.strokeStyle = color;
+    ctx.strokeStyle = "blue";
     ctx.stroke();
     //ctx.fill();
 
@@ -68,21 +72,46 @@ function drawCube(x, y, wx, wy, h, color) {
     ctx.lineTo(x - wx + wy, y - h - (wx * 0.5 + wy * 0.5));
     ctx.lineTo(x + wy, y - h - wy * 0.5);
     ctx.closePath();
-    ctx.fillStyle = "purple";
+    ctx.fillStyle = "blue";
     //ctx.strokeStyle = shadeColor(color, 60);
-    ctx.strokeStyle = color;
+    ctx.strokeStyle = "red";
     ctx.stroke();
     //ctx.fill();
 
+    //bottom 
     ctx.beginPath();
-    ctx.moveTo(x, y - h);
-    ctx.lineTo(x - wx, y - h - wx * 0.5);
-    ctx.lineTo(x - wx + wy, y - h - (wx * 0.5 + wy * 0.5));
-    ctx.lineTo(x + wy, y - h - wy * 0.5);
+    ctx.moveTo(x, y);
+    ctx.lineTo(x - wx, y - wx * 0.5);
+    ctx.lineTo(x - wx + wy, y - (wx * 0.5 + wy * 0.5));
+    ctx.lineTo(x + wy, y - wy * 0.5);
     ctx.closePath();
     ctx.fillStyle = "purple";
     //ctx.strokeStyle = shadeColor(color, 60);
     ctx.strokeStyle = "purple";
+    ctx.stroke();
+    //ctx.fill();
+
+    ctx.beginPath();
+    ctx.moveTo(x, y - h);
+    ctx.lineTo(x + wy, y - wy * 0.5);
+    ctx.lineTo(x + wy, y - h - wy * 0.5);
+    ctx.lineTo(x, y - h * 2);
+    ctx.closePath();
+    ctx.fillStyle = "violet";
+    //ctx.strokeStyle = shadeColor(color, 50);
+    ctx.strokeStyle = "orange";
+    ctx.stroke();
+    //ctx.fill();
+
+
+    ctx.beginPath();
+    ctx.moveTo(x, y - 100);
+    ctx.lineTo(x - wx, y - wx * 0.5);
+    ctx.lineTo(x - wx, y - h - wx * 0.5);
+    ctx.lineTo(x, y - h * 2);
+    ctx.closePath();
+    ctx.fillStyle = "violet";
+    ctx.strokeStyle = "black";
     ctx.stroke();
     //ctx.fill();
 
