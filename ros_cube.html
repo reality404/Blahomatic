@@ -53,6 +53,8 @@
                 node[2] = z * cosY + y * sinY;
             });
         }
+
+        const colours = ["red","orange","yellow","green","blue","indigo"]
  
         function drawCuboid() {
             g.save();
@@ -70,6 +72,10 @@
             });
  
             g.closePath();
+
+            g.fillStyle = colours[1];
+            g.fill();
+
             g.stroke();
  
             g.restore();
