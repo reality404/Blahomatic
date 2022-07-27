@@ -82,13 +82,18 @@ const render = () => {
   ctx.fillStyle = 'black';
   ctx.fillRect(-100,-100,600,600);
   faces.forEach((face, index) => {
+    ctx.fillStyle = "blue";
     ctx.fillStyle = face.color;
-    ctx.beginPath();
     const processedPoints = face.map(pid => points[pid].slice(0, 2));
+    ctx.beginPath();
+    //const processedPoints = face.map(pid => points[pid].slice(0, 2));
     ctx.moveTo(...processedPoints[0]);
     processedPoints.forEach(p => ctx.lineTo(...p));
+    console.log(processedPoints)
     ctx.closePath();
     ctx.fill();
+    //ctx.strokeStyle = "green";
+    //ctx.stroke();
   })
 }
 
@@ -97,7 +102,10 @@ const loop = () => {
   render();
   requestAnimationFrame(loop);
 }
-requestAnimationFrame(loop);
+//requestAnimationFrame(loop);
+
+update();
+render();
 
 
 

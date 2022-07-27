@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title> Spin me right round like a sheep </title>
+<style>
+  body{
+    margin: 0 auto;
+    overflow: hidden;
+    font-family: Twemoji Mozilla;
+  }
+
+</style>
+</head>
+<body>
+
+<script>
+
+const container = document.createElement('div'); 
+container.id = "container";
+document.body.appendChild(container);  
+
+const canvas = document.createElement('canvas');  
+canvas.width = window.innerWidth;
+canvas.height = window.innerHeight;
+canvas.classList.add("canvas");
+canvas.style.position = "absolute"; 
+canvas.style.zIndex = +2; 
+container.appendChild(canvas);           
+const ctx = canvas.getContext('2d');
+
+const Point2D = function(x, y) { this.x = x; this.y = y; };
+
+const Point3D = function(x, y, z) { this.x = x; this.y = y; this.z = z; };
+
+const vertices = [
+  [1,1,1],
+  [1,1,-1],
+  [1,-1,1],
+  [1,-1,-1],
+  [-1,1,1],
+  [-1,1,-1],
+  [-1,-1,1],
+  [-1,-1,-1]
+];
+
+for (let i = 0; i < vertices.length; i++) {
+console.log(Point3D(vertices[i][0],vertices[i][1],vertices[i][2]))
+
+  console.log(Point3D(...vertices[i]));
+}
+
+const faces = [
+  [0,1,3,2],
+  [0,1,5,4],
+  [0,2,6,4],
+  [1,3,7,5],
+  [2,3,7,6],
+  [4,5,7,6]
+];
+
+
+
+</script>
+</body>
+</html>
