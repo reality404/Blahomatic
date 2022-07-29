@@ -32,6 +32,23 @@
       container.appendChild(canvas);           
       const ctx = canvas.getContext('2d');
 
+      //fucking shark
+      //IMAGES
+      const blahaj = new Image();
+      blahaj.onload = function(){}
+      blahaj.src = "shark.jpg";
+
+       function drawImg(context, img, x,y){
+
+        //image, sx, sy, sWidth, sHeight, dx, dy, dWidth, dHeight
+         context.drawImage(img, 0, 0, img.width, img.height, x, y, img.width, img.height);
+
+         console.log(img.width, img.height);
+
+       }
+
+       drawImg(ctx,blahaj,0,0);
+
       const Point2D = function(x, y) { this.x = x; this.y = y; };
 
       const Point3D = function(x, y, z) { this.x = x; this.y = y; this.z = z; };
@@ -140,6 +157,8 @@
         context.fillStyle = "#ffffff";
         context.fillRect(0, 0, width, height);
 
+        ctx.drawImage(blahaj,0,0);
+
         context.strokeStyle = "#ffffff";
 
         cube.rotateX(pointer.y * 0.0001);
@@ -163,6 +182,9 @@
           //console.log(-p1.x * n.x + -p1.y * n.y + -p1.z * n.z <= 0);
           if (-p1.x * n.x + -p1.y * n.y + -p1.z * n.z <= 0) {
 
+
+            
+
             context.beginPath();
             context.moveTo(vertices[face[0]].x, vertices[face[0]].y);
             context.lineTo(vertices[face[1]].x, vertices[face[1]].y);
@@ -173,21 +195,22 @@
             context.fill();
             context.stroke();
 
+            
+
           }
 
 
         }
 
+        pointer.x = width * 0.15;
+        pointer.y = height * 0.15;
       }
 
-      loop();
+      //loop();
 
-      window.addEventListener("click", (event) => {
 
-        pointer.x = event.pageX - width * 0.5;
-        pointer.y = event.pageY - height * 0.5;
 
-      });
+
 
     </script>
 
