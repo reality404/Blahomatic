@@ -116,12 +116,21 @@ function loop() {
      for( let i = 0; i < facesArray.length; i++ ) {
          let faces = facesArray[i]
 
-         ctx.beginPath()
-         ctx.moveTo(points[faces[0]].x,points[faces[0]].y)
-         ctx.lineTo(points[faces[1]].x,points[faces[1]].y)
-         ctx.lineTo(points[faces[2]].x,points[faces[2]].y)
-         ctx.lineTo(points[faces[3]].x,points[faces[3]].y)
-         ctx.closePath()
+         let edge1x = points[faces[1]].x - points[faces[0]].x;
+         let edge1y = points[faces[1]].y - points[faces[0]].y;
+         let edge2x = points[faces[2]].x - points[faces[0]].x;
+         let edge2y = points[faces[2]].y - points[faces[0]].y;
+         let visible = ((edge1x * edge2y) - (edge2x * edge1y)) > 0;
+
+         if (visible) {
+           ctx.beginPath()
+           ctx.moveTo(points[faces[0]].x,points[faces[0]].y)
+           ctx.lineTo(points[faces[1]].x,points[faces[1]].y)
+           ctx.lineTo(points[faces[2]].x,points[faces[2]].y)
+           ctx.lineTo(points[faces[3]].x,points[faces[3]].y)
+           ctx.closePath()
+         }
+
 
          ctx.fillStyle = cubeColours[i];
          ctx.fill();
