@@ -43,7 +43,9 @@
         //image, sx, sy, sWidth, sHeight, dx, dy, dWidth, dHeight
          let dWidth = w;
          
-         let dHeight = (img.width-w) - img.height;
+         let dHeight = img.height;
+
+         console.log(Math.abs(img.width - w));
 
          context.drawImage(img, 0, 0, img.width, img.height, x, y, dWidth, dHeight);
 
@@ -51,7 +53,7 @@
 
        }
 
-       drawImg(ctx,blahaj,0,0,100,100);
+       drawImg(ctx,blahaj,0,0,150,100);
 
       const Point2D = function(x, y) { this.x = x; this.y = y; };
 
