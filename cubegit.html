@@ -38,16 +38,20 @@
       blahaj.onload = function(){}
       blahaj.src = "shark.jpg";
 
-       function drawImg(context, img, x,y){
+       function drawImg(context, img, x,y,w,h){
 
         //image, sx, sy, sWidth, sHeight, dx, dy, dWidth, dHeight
-         context.drawImage(img, 0, 0, img.width, img.height, x, y, img.width, img.height);
+         let dWidth = w;
+         
+         let dHeight = (img.width-w) - img.height;
+
+         context.drawImage(img, 0, 0, img.width, img.height, x, y, dWidth, dHeight);
 
          console.log(img.width, img.height);
 
        }
 
-       drawImg(ctx,blahaj,0,0);
+       drawImg(ctx,blahaj,0,0,100,100);
 
       const Point2D = function(x, y) { this.x = x; this.y = y; };
 
